@@ -6,13 +6,13 @@ use NNV\RestCountries;
 
 interface iInformacion{
     public function MostrarDatosJson();
-    public function ObtenerDatos($nombre);
+    public static function ObtenerDatos($nombre);
 }
 
 abstract class CriterioBusqueda implements iInformacion{
     public $paises;
-    public function __construct($nombre){
-        $this->paises= $this->ObtenerDatos($nombre);
+    public function __construct($datos){
+        $this->paises= $datos;
     }
 
     public function MostrarDatosJson(){
@@ -22,10 +22,10 @@ abstract class CriterioBusqueda implements iInformacion{
 
 class Continente extends CriterioBusqueda{
     public function __construct($nombre){
-        parent::__construct($nombre);
+        parent::__construct(self::ObtenerDatos($nombre));
     }
 
-    public function ObtenerDatos($nombre){
+    public static function ObtenerDatos($nombre){
         $restCountries = new RestCountries;
         return $restCountries->byRegion($nombre);
     }
@@ -33,10 +33,10 @@ class Continente extends CriterioBusqueda{
 
 class Idioma extends CriterioBusqueda{
     public function __construct($nombre){
-        parent::__construct($nombre);
+        parent::__construct(self::ObtenerDatos($nombre));
     }
 
-    public function ObtenerDatos($nombre){
+    public static function ObtenerDatos($nombre){
         $restCountries = new RestCountries;
         return $restCountries->byLanguage($nombre);  
     }
@@ -44,10 +44,10 @@ class Idioma extends CriterioBusqueda{
 
 class Capital extends CriterioBusqueda{
     public function __construct($nombre){
-        parent::__construct($nombre);
+        parent::__construct(self::ObtenerDatos($nombre));
     }
 
-    public function ObtenerDatos($nombre){
+    public static function ObtenerDatos($nombre){
         $restCountries = new RestCountries;
         return $restCountries->byCapitalCity($nombre);  
     }
@@ -55,10 +55,10 @@ class Capital extends CriterioBusqueda{
 
 class SubRegion extends CriterioBusqueda{
     public function __construct($nombre){
-        parent::__construct($nombre);
+        parent::__construct(self::ObtenerDatos($nombre));
     }
 
-    public function ObtenerDatos($nombre){
+    public static function ObtenerDatos($nombre){
         $restCountries = new RestCountries;
         return $restCountries->byRegionalBloc($nombre);
     }
