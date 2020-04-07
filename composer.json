@@ -1,0 +1,13 @@
+{
+    "name": "camila/tp1",
+    "description": "Programacion 3 TP1: composer",
+    "authors": [
+        {
+            "name": "Camila Rori",
+            "email": "camila.a.rori@gmail.com"
+        }
+    ],
+    "require": {
+        "namnv609/php-rest-countries": "^1.0"
+    }
+}
